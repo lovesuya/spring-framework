@@ -120,6 +120,7 @@ public class XmlReaderContext extends ReaderContext {
 	 * @see XmlBeanDefinitionReader#setNamespaceHandlerResolver
 	 */
 	public final NamespaceHandlerResolver getNamespaceHandlerResolver() {
+		//构造函数创建DefaultNamespaceHandlerResolver
 		return this.namespaceHandlerResolver;
 	}
 

@@ -71,6 +71,7 @@ public abstract class NamespaceHandlerSupport implements NamespaceHandler {
 	@Nullable
 	public BeanDefinition parse(Element element, ParserContext parserContext) {
 		BeanDefinitionParser parser = findParserForElement(element, parserContext);
+		//根据标签找到对应的parser例如ComponentScanBeanDefinitionParser通过component-scan标签找到
 		return (parser != null ? parser.parse(element, parserContext) : null);
 	}
 

@@ -188,7 +188,7 @@ class ConfigurationClassParser {
 						"Failed to parse configuration class [" + bd.getBeanClassName() + "]", ex);
 			}
 		}
-
+		//处理实现了DeferredImportSelector的类
 		this.deferredImportSelectorHandler.process();
 	}
 
@@ -771,6 +771,7 @@ class ConfigurationClassParser {
 
 		public void process() {
 			List<DeferredImportSelectorHolder> deferredImports = this.deferredImportSelectors;
+			//设置空，当类递归的时候，processGroupImports会直接调用processImports，继续会调用handle，这样就可以直接执行了，而不是添加
 			this.deferredImportSelectors = null;
 			try {
 				if (deferredImports != null) {
