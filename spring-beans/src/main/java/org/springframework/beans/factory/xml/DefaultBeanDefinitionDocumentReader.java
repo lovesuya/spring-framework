@@ -147,6 +147,7 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 		}
 
 		preProcessXml(root);
+		//解析doc
 		parseBeanDefinitions(root, this.delegate);
 		postProcessXml(root);
 
@@ -174,9 +175,11 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 				if (node instanceof Element) {
 					Element ele = (Element) node;
 					if (delegate.isDefaultNamespace(ele)) {
+						//默认节点
 						parseDefaultElement(ele, delegate);
 					}
 					else {
+						//自定义节点
 						delegate.parseCustomElement(ele);
 					}
 				}

@@ -217,7 +217,7 @@ public abstract class AbstractApplicationEventMulticaster
 			// If result is null, the existing retriever is not fully populated yet by another thread.
 			// Proceed like caching wasn't possible for this current local attempt.
 		}
-
+		//获取符合条件的
 		return retrieveApplicationListeners(eventType, sourceType, newRetriever);
 	}
 
@@ -245,6 +245,7 @@ public abstract class AbstractApplicationEventMulticaster
 		// Add programmatically registered listeners, including ones coming
 		// from ApplicationListenerDetector (singleton beans and inner beans).
 		for (ApplicationListener<?> listener : listeners) {
+			//supportsEvent进行过滤
 			if (supportsEvent(listener, eventType, sourceType)) {
 				if (retriever != null) {
 					filteredListeners.add(listener);
@@ -375,6 +376,8 @@ public abstract class AbstractApplicationEventMulticaster
 
 		GenericApplicationListener smartListener = (listener instanceof GenericApplicationListener ?
 				(GenericApplicationListener) listener : new GenericApplicationListenerAdapter(listener));
+		//supportsEventType实现类可以根据事件类型去判断是否返回true
+		//supportsSourceType没有实现SmartApplicationListener或者实现他，默认返回true
 		return (smartListener.supportsEventType(eventType) && smartListener.supportsSourceType(sourceType));
 	}
 
